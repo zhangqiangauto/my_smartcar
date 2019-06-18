@@ -1,0 +1,20 @@
+<launch>
+    <!--default定义的值可以在launch的时候通过命令行指定而被覆盖,而value定义的值不会-->
+    <include file="$(find static_tf)/launch/static_tf_yunlecar.launch" />
+    <include file="$(find ray_ground_filter)/launch/Yunlecar_ray_ground_filter.launch" />
+
+    <!-- <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" /> -->
+    <!-- <include file="$(find razor_imu_9dof)/launch/razor_pub.launch" /> --> -->
+
+    <param name="use_sim_time" value="false" type="bool"/>
+
+    <node pkg="ndt_mapping" type="fast_ndt_mapping_node" name="fast_ndt_mapping_node" output="screen">
+        <rosparam file="$(find ndt_mapping)/params/params_ndt_mapping.yaml" command="load"/>
+    </node>
+
+    <node pkg="rviz" type="rviz" name="Rviz_for_mapping" args="-d $(find ndt_mapping)/rviz/mapping.rviz" />
+</launch>
+
+
+ <!--rosbag record -o out /globalmap/map_for_costmap-->
+ <!--rosrun pcl_ros bag_to_pcd out /globalmap/map_for_costmap pcd-->
