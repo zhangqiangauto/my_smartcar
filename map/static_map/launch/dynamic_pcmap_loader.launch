@@ -1,0 +1,8 @@
+<launch>
+    <node pkg="static_map" type="dynamic_pcmap_loader" name="dynamic_pcmap_loader" output="screen">
+        <param name="piece_map_folder" value="$(find static_map)/map_file/yuquan_zetong/piece_map_zetong/" type="string" />
+        <param name="piece_map_step" value="30.0" type="double" />
+        <param name="update_interval" value="5.0" type="double" />
+    </node>
+
+</launch>

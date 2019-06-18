@@ -19,13 +19,13 @@ find_package(Eigen3 REQUIRED)
 # find_package(OpenCV REQUIRED)
 
 find_package(catkin REQUIRED COMPONENTS
-	roscpp
+  roscpp
   nav_msgs
   pcl_conversions
   sensor_msgs
-	tf
-	std_msgs
-	geometry_msgs
+  tf
+  std_msgs
+  geometry_msgs
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
@@ -55,6 +55,7 @@ target_link_libraries(fast_ndt_mapping_node ndt_cpu pcl_omp_registration)
 if (CUDA_FOUND)
 	target_link_libraries(fast_ndt_mapping_node ndt_gpu)
 endif ()
+
 # add_dependencies(fast_ndt_mapping_node ${catkin_EXPORTED_TARGETS} )
 
 # 正确顺序  --错误顺序将导致编译失败!!!!!

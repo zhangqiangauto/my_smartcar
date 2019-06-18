@@ -24,7 +24,7 @@ ros::Publisher pub_pc_;
 ros::Publisher pub_obstacle_path_;
 nav_msgs::OccupancyGrid msg_costmap_;
 nav_msgs::OccupancyGrid msg_global_costmap_;
-// tf::TransformListener tf_listener_;      //这玩意居然是个 nodehandle ，如果在全局定义的话会报错：You must call ros::init() before creating the first NodeHandle
+// tf::TransformListener tf_listener_;      // 这玩意居然是个 nodehandle ，如果在全局定义的话会报错：You must call ros::init() before creating the first NodeHandle
 tf::StampedTransform tf_base2laser_;
 tf::StampedTransform tf_map2base_;
 tf::StampedTransform tf_map2laser_;

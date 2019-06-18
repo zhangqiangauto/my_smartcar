@@ -3,7 +3,6 @@ laser_frame: "velodyne"                                 # smartcar_lab
 imu_topic: "/imu"               # smartcar_lab
 # lidar_topic: "/velodyne_points"                           # smartcar_lab
 lidar_topic: "/ray_filter/velodyne_points_filtered"                           # smartcar_lab
-
 #>>>>>>>>>Ese
 # laser_frame: "laser"                                  # ese
 # imu_topic: "/imu/data"                 # ese
@@ -14,13 +13,13 @@ use_imu: false
 use_odom: false
 imu_upside_down: false
 
-visualize: true
+visualize: false
 ndt_method_type: 2  # 0:pcl 1:cpu 2:gpu 3:omp 4:gpu_ptr
 
-is_publish_map_full: false
-is_publish_map_filterd_ground: false
-is_publish_map_for_costmap: true
-is_publish_map_for_vectormap: false
+# >>>>>>> 定义发布不同类型的map
+is_publish_map_full: true
+is_publish_map_for_costmap: true  #生成用于制作costmap的点云地图
+is_publish_map_for_planning: false
 #>>>>>>>>>common params
 base_frame: "base_link"
 odom_topic: "/odom_raw"
@@ -40,12 +39,19 @@ max_scan_range: 60.0
 
 
 # global map-set params
-min_add_scan_shift: 3  # add to voxeled_local_map
+min_add_scan_shift: 1.5  # add to voxeled_local_map
 min_update_target_map: 1.0  # add to global_map
 
-global_voxel_leafsize: 2.0   # (self defined) refiltered map-pub voxel leaf-size
+global_voxel_leafsize: 1.0   # (self defined) refiltered map-pub voxel leaf-size
 
 extract_length: 60  # extract target_map from voxeled_local_map
 extract_width: 50
 
 tf_timeout: 1.0
+
+# piece-map params
+# # piece_map_folder: #
+# # piece_step: 30.0  # 用于划分全局地图  注: 该值实际上为当前块map中心的可移动范围值
+# # piece_thresh: 5.0 # 用于确定提前多少距离更新地图  # 这个参数应该在points_map_loader里使用
+
+
