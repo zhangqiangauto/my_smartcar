@@ -2,7 +2,6 @@
     <!--default定义的值可以在launch的时候通过命令行指定而被覆盖,而value定义的值不会-->
     <include file="$(find static_tf)/launch/static_tf_yunlecar.launch" />
     <include file="$(find ray_ground_filter)/launch/Yunlecar_ray_ground_filter.launch" />
-
     <!-- <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" /> -->
     <!-- <include file="$(find razor_imu_9dof)/launch/razor_pub.launch" /> --> -->
 
@@ -10,11 +9,25 @@
 
     <node pkg="ndt_mapping" type="fast_ndt_mapping_node" name="fast_ndt_mapping_node" output="screen">
         <rosparam file="$(find ndt_mapping)/params/params_ndt_mapping.yaml" command="load"/>
+        <!--<param name="planning_map_folder" type="string" value="/home/sin/Data/ros_bag/map/planning_map/" />-->
+
+        <!--生成用于制作costmap的点云地图-->
+        <param name="cost_map_folder" type="string" value="/home/robot/Desktop/smartcar/src/Smartcar-ROS/map/ndt_mapping/cost_map_done/" />
+
+        <!-- piece_map 相关参数: piece map 需要开启fullmap -->
+        <!--<param name="if_create_piece_map" type="bool" value="false" />
+        <param name="piece_map_folder" type="string" value="/home/robot/Desktop/smartcar/src/Smartcar-ROS/map/ndt_mapping/piece_map/" />
+        <param name="piece_step" type="double" value="30.0" />-->
     </node>
 
     <node pkg="rviz" type="rviz" name="Rviz_for_mapping" args="-d $(find ndt_mapping)/rviz/mapping.rviz" />
+    
 </launch>
 
 
- <!--rosbag record -o out /globalmap/map_for_costmap-->
- <!--rosrun pcl_ros bag_to_pcd out /globalmap/map_for_costmap pcd-->
+<!--  rosbag record -o out /globalmap/map_full   -->
+<!--  rosbag record -o out /global_map/costmap_cloud  -->
+
+<!--  rosrun pcl_ros bag_to_pcd out /globalmap/map_full   pcd  -->
+<!--  rosrun pcl_ros bag_to_pcd out /global_map/costmap_cloud pcd  -->
+
